@@ -6,15 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A469967B2CBEDDAA0073878E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A469967A2CBEDDAA0073878E /* SnapKit */; };
+		A46996A32CBF2DF40073878E /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = A46996A22CBF2DF40073878E /* Lottie */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		A457B1742CBE6C0800FD91DA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A457B1552CBE6C0600FD91DA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A457B15C2CBE6C0600FD91DA;
-			remoteInfo = TransportSchedules;
-		};
-		A457B17E2CBE6C0800FD91DA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A457B1552CBE6C0600FD91DA /* Project object */;
 			proxyType = 1;
@@ -26,7 +24,6 @@
 /* Begin PBXFileReference section */
 		A457B15D2CBE6C0600FD91DA /* TransportSchedules.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransportSchedules.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A457B1732CBE6C0800FD91DA /* TransportSchedulesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransportSchedulesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A457B17D2CBE6C0800FD91DA /* TransportSchedulesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransportSchedulesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -53,11 +50,6 @@
 			path = TransportSchedulesTests;
 			sourceTree = "<group>";
 		};
-		A457B1802CBE6C0800FD91DA /* TransportSchedulesUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = TransportSchedulesUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,17 +57,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A469967B2CBEDDAA0073878E /* SnapKit in Frameworks */,
+				A46996A32CBF2DF40073878E /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A457B1702CBE6C0800FD91DA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A457B17A2CBE6C0800FD91DA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -90,7 +77,6 @@
 			children = (
 				A457B15F2CBE6C0600FD91DA /* TransportSchedules */,
 				A457B1762CBE6C0800FD91DA /* TransportSchedulesTests */,
-				A457B1802CBE6C0800FD91DA /* TransportSchedulesUITests */,
 				A457B15E2CBE6C0600FD91DA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -100,7 +86,6 @@
 			children = (
 				A457B15D2CBE6C0600FD91DA /* TransportSchedules.app */,
 				A457B1732CBE6C0800FD91DA /* TransportSchedulesTests.xctest */,
-				A457B17D2CBE6C0800FD91DA /* TransportSchedulesUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -125,6 +110,8 @@
 			);
 			name = TransportSchedules;
 			packageProductDependencies = (
+				A469967A2CBEDDAA0073878E /* SnapKit */,
+				A46996A22CBF2DF40073878E /* Lottie */,
 			);
 			productName = TransportSchedules;
 			productReference = A457B15D2CBE6C0600FD91DA /* TransportSchedules.app */;
@@ -153,29 +140,6 @@
 			productReference = A457B1732CBE6C0800FD91DA /* TransportSchedulesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		A457B17C2CBE6C0800FD91DA /* TransportSchedulesUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A457B18E2CBE6C0800FD91DA /* Build configuration list for PBXNativeTarget "TransportSchedulesUITests" */;
-			buildPhases = (
-				A457B1792CBE6C0800FD91DA /* Sources */,
-				A457B17A2CBE6C0800FD91DA /* Frameworks */,
-				A457B17B2CBE6C0800FD91DA /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A457B17F2CBE6C0800FD91DA /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				A457B1802CBE6C0800FD91DA /* TransportSchedulesUITests */,
-			);
-			name = TransportSchedulesUITests;
-			packageProductDependencies = (
-			);
-			productName = TransportSchedulesUITests;
-			productReference = A457B17D2CBE6C0800FD91DA /* TransportSchedulesUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -193,10 +157,6 @@
 						CreatedOnToolsVersion = 16.0;
 						TestTargetID = A457B15C2CBE6C0600FD91DA;
 					};
-					A457B17C2CBE6C0800FD91DA = {
-						CreatedOnToolsVersion = 16.0;
-						TestTargetID = A457B15C2CBE6C0600FD91DA;
-					};
 				};
 			};
 			buildConfigurationList = A457B1582CBE6C0600FD91DA /* Build configuration list for PBXProject "TransportSchedules" */;
@@ -208,6 +168,10 @@
 			);
 			mainGroup = A457B1542CBE6C0600FD91DA;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A46996792CBEDDAA0073878E /* XCRemoteSwiftPackageReference "SnapKit" */,
+				A46996A12CBF2DF40073878E /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A457B15E2CBE6C0600FD91DA /* Products */;
 			projectDirPath = "";
@@ -215,7 +179,6 @@
 			targets = (
 				A457B15C2CBE6C0600FD91DA /* TransportSchedules */,
 				A457B1722CBE6C0800FD91DA /* TransportSchedulesTests */,
-				A457B17C2CBE6C0800FD91DA /* TransportSchedulesUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -229,13 +192,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A457B1712CBE6C0800FD91DA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A457B17B2CBE6C0800FD91DA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -259,13 +215,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A457B1792CBE6C0800FD91DA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -273,11 +222,6 @@
 			isa = PBXTargetDependency;
 			target = A457B15C2CBE6C0600FD91DA /* TransportSchedules */;
 			targetProxy = A457B1742CBE6C0800FD91DA /* PBXContainerItemProxy */;
-		};
-		A457B17F2CBE6C0800FD91DA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A457B15C2CBE6C0600FD91DA /* TransportSchedules */;
-			targetProxy = A457B17E2CBE6C0800FD91DA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -291,11 +235,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TransportSchedules/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -303,9 +248,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.TransportSchedules;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -318,11 +267,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TransportSchedules/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -330,9 +280,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.TransportSchedules;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -491,38 +445,6 @@
 			};
 			name = Release;
 		};
-		A457B18F2CBE6C0800FD91DA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.TransportSchedulesUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = TransportSchedules;
-			};
-			name = Debug;
-		};
-		A457B1902CBE6C0800FD91DA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.TransportSchedulesUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = TransportSchedules;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -553,16 +475,39 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A457B18E2CBE6C0800FD91DA /* Build configuration list for PBXNativeTarget "TransportSchedulesUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A457B18F2CBE6C0800FD91DA /* Debug */,
-				A457B1902CBE6C0800FD91DA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A46996792CBEDDAA0073878E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		A46996A12CBF2DF40073878E /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A469967A2CBEDDAA0073878E /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A46996792CBEDDAA0073878E /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		A46996A22CBF2DF40073878E /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A46996A12CBF2DF40073878E /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A457B1552CBE6C0600FD91DA /* Project object */;
 }
