@@ -8,10 +8,10 @@
 import Foundation
 
 final class AppCoordinator: BaseCoordinator {
-    
     fileprivate let factory: CoordinatorFactoryProtocol
     fileprivate let router: Routable
     
+    // MARK: - Initializer
     init(router: Routable,
          factory: CoordinatorFactoryProtocol) {
         self.router  = router
@@ -28,13 +28,13 @@ private extension AppCoordinator {
         let coordinator = factory.makeLoadingViewController(router: router)
         coordinator.finishFlow = { [weak self] in
             guard let self = self else { return }
-            self.showMainScreen()
+            self.showSearchScreen()
         }
         coordinator.start()
     }
     
-    func showMainScreen() {
-        let coordinator = factory.makeMainCoordinator(router: router)
+    func showSearchScreen() {
+        let coordinator = factory.makeSearchCoordinator(router: router)
         coordinator.start()
     }
 }

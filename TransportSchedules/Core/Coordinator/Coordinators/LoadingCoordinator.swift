@@ -8,16 +8,16 @@
 import Foundation
 
 protocol LoadingFactoryProtocol {
-    func makeLoadingViewController() -> LoadingViewController
+    func makeLoadingViewController(withCoordinator: LoadingCoordinatorProtocol) -> LoadingViewController
 }
 
 protocol LoadingCoordinatorOutput: AnyObject {
     var finishFlow: CompletionBlock? { get set }
 }
 
-final class LoadingCoordinator: BaseCoordinator,
-                                MainCoordinatorOutput {
-    
+typealias LoadingCoordinatorProtocol = BaseCoordinator & SearchCoordinatorOutput
+
+final class LoadingCoordinator: LoadingCoordinatorProtocol {
     var finishFlow: CompletionBlock?
     
     // MARK: - Private Properties
@@ -31,19 +31,10 @@ final class LoadingCoordinator: BaseCoordinator,
         self.factory = factory
     }
     
-    // MARK: - Start Logic
+    // MARK: - Search Logic
     override func start() {
-        let loadingViewController = factory.makeLoadingViewController()
+        let loadingViewController = factory.makeLoadingViewController(withCoordinator: self)
         router.setRootModule(loadingViewController,
                              hideBar: true)
-        simulateLoading { [weak self] in
-            self?.finishFlow?()
-        }
-    }
-    
-    private func simulateLoading(completion: @escaping CompletionBlock) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            completion()
-        }
     }
 }

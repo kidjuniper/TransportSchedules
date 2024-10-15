@@ -8,16 +8,15 @@
 import Foundation
 
 final class CoordinatorFactory: CoordinatorFactoryProtocol {
-    
     func makeLoadingViewController(router: Routable) -> LoadingCoordinator {
         let coordinator = LoadingCoordinator(router: router,
                                              factory: LoadingFactory())
         return coordinator
     }
     
-    func makeMainCoordinator(router: Routable) -> MainCoordinator {
-        let coordinator = MainCoordinator(router: router,
-                                          factory: MainFactory())
+    func makeSearchCoordinator(router: Routable) -> SearchCoordinator {
+        let coordinator = SearchCoordinator(router: router,
+                                          factory: SearchFactory())
         return coordinator
     }
 }

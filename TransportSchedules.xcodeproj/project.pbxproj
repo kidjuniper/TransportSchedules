@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A469967B2CBEDDAA0073878E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A469967A2CBEDDAA0073878E /* SnapKit */; };
+		A46996A32CBF2DF40073878E /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = A46996A22CBF2DF40073878E /* Lottie */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		A457B1742CBE6C0800FD91DA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +57,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A469967B2CBEDDAA0073878E /* SnapKit in Frameworks */,
+				A46996A32CBF2DF40073878E /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +110,8 @@
 			);
 			name = TransportSchedules;
 			packageProductDependencies = (
+				A469967A2CBEDDAA0073878E /* SnapKit */,
+				A46996A22CBF2DF40073878E /* Lottie */,
 			);
 			productName = TransportSchedules;
 			productReference = A457B15D2CBE6C0600FD91DA /* TransportSchedules.app */;
@@ -159,6 +168,10 @@
 			);
 			mainGroup = A457B1542CBE6C0600FD91DA;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A46996792CBEDDAA0073878E /* XCRemoteSwiftPackageReference "SnapKit" */,
+				A46996A12CBF2DF40073878E /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A457B15E2CBE6C0600FD91DA /* Products */;
 			projectDirPath = "";
@@ -463,6 +476,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A46996792CBEDDAA0073878E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		A46996A12CBF2DF40073878E /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A469967A2CBEDDAA0073878E /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A46996792CBEDDAA0073878E /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		A46996A22CBF2DF40073878E /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A46996A12CBF2DF40073878E /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A457B1552CBE6C0600FD91DA /* Project object */;
 }

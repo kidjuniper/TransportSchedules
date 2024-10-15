@@ -9,7 +9,7 @@ import Foundation
 
 typealias CompletionBlock = () -> Void
 
-protocol Routable: Presentable { // simple version for simple app :)
+protocol Routable: Presentable { 
     func setRootModule(_ module: Presentable?,
                        hideBar: Bool)
     func dismissModule(animated: Bool,
