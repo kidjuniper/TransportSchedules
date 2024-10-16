@@ -8,9 +8,11 @@
 import Foundation
 
 final class CoordinatorFactory: CoordinatorFactoryProtocol {
-    func makeLoadingViewController(router: Routable) -> LoadingCoordinator {
+    func makeLoadingViewController(router: Routable,
+                                   stationManager: StationListManagerProtocol) -> LoadingCoordinator {
         let coordinator = LoadingCoordinator(router: router,
-                                             factory: LoadingFactory())
+                                             factory: LoadingFactory(),
+                                             stationManager: stationManager)
         return coordinator
     }
     

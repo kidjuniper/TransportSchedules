@@ -8,6 +8,7 @@
 import Foundation
 
 protocol CoordinatorFactoryProtocol {
-    func makeLoadingViewController(router: Routable) -> LoadingCoordinator
+    func makeLoadingViewController(router: Routable,
+                                   stationManager: StationListManagerProtocol) -> LoadingCoordinator
     func makeSearchCoordinator(router: Routable) -> SearchCoordinator
 }

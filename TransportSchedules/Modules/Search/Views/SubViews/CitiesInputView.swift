@@ -47,6 +47,7 @@ extension CitiesInputView {
         layer.borderWidth = 1
         layer.borderColor = UIColor.lightGray.cgColor
         layer.cornerRadius = 10
+        backgroundColor = .white
         clipsToBounds = true
     }
     
@@ -83,7 +84,7 @@ extension CitiesInputView {
         let button = UIButton()
         button.setTitle(placeholder,
                         for: .normal)
-        button.setTitleColor(.black,
+        button.setTitleColor(.accentText,
                              for: .normal)
         button.titleLabel?.font = .preferredFont(forTextStyle: .headline)
         return button
@@ -100,7 +101,7 @@ extension CitiesInputView {
         button.setImage(UIImage(systemName: "arrow.up.arrow.down"),
                         for: .normal)
         button.backgroundColor = .clear
-        button.tintColor = .black
+        button.tintColor = .accentText
         return button
     }
     
