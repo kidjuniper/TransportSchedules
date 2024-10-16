@@ -74,6 +74,16 @@ extension SearchViewController: DateSelectionDelegate {
     }
 }
 
+extension SearchViewController: StationsSelectionDelegate {
+    func didTappedSelectArrivalStation() {
+        presenter?.didTappedArrivalStation()
+    }
+    
+    func didTappedSelectDepartureStation() {
+        presenter?.didTappedDepartureStation()
+    }
+}
+
 // MARK: - Private Funcs
 extension SearchViewController {
     private func setUp() {
@@ -160,9 +170,10 @@ extension SearchViewController {
         return label
     }
     
-    private func makeCitiesSelectionView() -> CitiesInputView {
-        let citiesSelector = CitiesInputView()
-        return citiesSelector
+    private func makeCitiesSelectionView() -> StationsInputView {
+        let stationsSelector = StationsInputView()
+        stationsSelector.delegate = self
+        return stationsSelector
     }
     
     private func makeDateSelectionView() -> DateSelectionView {

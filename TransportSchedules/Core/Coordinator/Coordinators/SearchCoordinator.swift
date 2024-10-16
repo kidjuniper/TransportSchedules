@@ -13,12 +13,17 @@ protocol SearchFactoryProtocol {
 
 protocol SearchCoordinatorOutput: AnyObject {
     var finishFlow: CompletionBlock? { get set }
+    var arrivingStationSelectionFlow: CompletionBlock? { get set }
+    var departureStationSelectionFlow: CompletionBlock? { get set }
 }
 
 typealias SearchCoordinatorProtocol = BaseCoordinator & SearchCoordinatorOutput
 
 final class SearchCoordinator: SearchCoordinatorProtocol {
     var finishFlow: CompletionBlock?
+    
+    var arrivingStationSelectionFlow: CompletionBlock?
+    var departureStationSelectionFlow: CompletionBlock?
     
     // MARK: - Private Properties
     fileprivate let factory: SearchFactoryProtocol
@@ -32,8 +37,8 @@ final class SearchCoordinator: SearchCoordinatorProtocol {
     }
     
     override func start() {
-        let SearchViewController = factory.makeSearchViewController(withCoordinator: self)
-        router.setRootModule(SearchViewController,
+        let stationSelectionVC = factory.makeSearchViewController(withCoordinator: self)
+        router.setRootModule(stationSelectionVC,
                              hideBar: true)
     }
 }

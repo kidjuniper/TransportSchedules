@@ -95,6 +95,12 @@ struct StationCodes: Codable,
         esrCode = ""
     }
     
+    init(yandexCode: String,
+         esrCode: String) {
+        self.yandexCode = yandexCode
+        self.esrCode = esrCode
+    }
+    
     @DefaultEmptyString
     var yandexCode: String
     @DefaultEmptyString

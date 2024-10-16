@@ -13,15 +13,22 @@ protocol SearchViewOutputProtocol: AnyObject,
     func viewDidLoad()
     func didTappedSearch()
     func didSelectedDate(date: Date)
+    func didTappedArrivalStation()
+    func didSelectedArrivalStation(station: Station)
+    func didTappedDepartureStation()
+    func didSelectedDepartureStation(station: Station)
     func didSelectedTransport(atIndex: IndexPath)
     func collectionView(sizeForItemAt indexPath: IndexPath) -> CGSize
 }
 
 final class SearchPresenter: NSObject {
     private weak var viewController: SearchViewInputProtocol?
+    private let coordinator: SearchCoordinatorProtocol
     
-    init(viewController: SearchViewInputProtocol) {
+    init(viewController: SearchViewInputProtocol,
+         coordinator: SearchCoordinatorProtocol) {
         self.viewController = viewController
+        self.coordinator = coordinator
     }
     
     // MARK: - Privat Properties
@@ -40,6 +47,22 @@ final class SearchPresenter: NSObject {
 
 // MARK: - TransportViewOutputProtocol
 extension SearchPresenter: SearchViewOutputProtocol {
+    func didSelectedArrivalStation(station: Station) {
+        
+    }
+    
+    func didSelectedDepartureStation(station: Station) {
+        
+    }
+    
+    func didTappedArrivalStation() {
+        coordinator.arrivingStationSelectionFlow?()
+    }
+    
+    func didTappedDepartureStation() {
+        coordinator.departureStationSelectionFlow?()
+    }
+
     func collectionView(sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch transportData[indexPath.row].type {
         case .text:

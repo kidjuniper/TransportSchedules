@@ -1,5 +1,5 @@
 //
-//  CitiesInputView.swift
+//  StationsInputView.swift
 //  TransportSchedules
 //
 //  Created by Nikita Stepanov on 15.10.2024.
@@ -10,16 +10,17 @@ import UIKit
 import SnapKit
 
 // MARK: - Delegate Protocol
-protocol CitiesSelectionDelegate: AnyObject {
-    func didSelectCitiesOption(citiesIndexes indexes: [String])
+protocol StationsSelectionDelegate: AnyObject {
+    func didTappedSelectArrivalStation()
+    func didTappedSelectDepartureStation()
 }
 
-class CitiesInputView: UIView {
-    weak var delegate: CitiesSelectionDelegate?
+class StationsInputView: UIView {
+    weak var delegate: StationsSelectionDelegate?
     
     // MARK: - Private Properties
-    private lazy var departureTextField = makeButton(placeholder: K.departureCityPlaceholder)
-    private lazy var arrivalTextField = makeButton(placeholder: K.arrivalCityPlaceholder)
+    private lazy var departureButton = makeButton(placeholder: K.departureCityPlaceholder)
+    private lazy var arrivalButton = makeButton(placeholder: K.arrivalCityPlaceholder)
     private lazy var lineView = makeLineView()
     private lazy var arrowButton = makeArrowButton()
     private lazy var stackView = makeStackView()
@@ -36,11 +37,12 @@ class CitiesInputView: UIView {
 }
 
 // MARK: - Private Funcs
-extension CitiesInputView {
+extension StationsInputView {
     // MARK: - Final SetUp
     private func setUp() {
         setUpLayout()
         setUpAppearance()
+        setUpTargets()
     }
     
     private func setUpAppearance() {
@@ -72,14 +74,31 @@ extension CitiesInputView {
         lineView.snp.makeConstraints { make in
             make.height.equalTo(1)
         }
-        departureTextField.snp.makeConstraints { make in
-            make.width.equalTo(arrivalTextField.snp.width)
+        departureButton.snp.makeConstraints { make in
+            make.width.equalTo(departureButton.snp.width)
         }
+    }
+    
+    private func setUpTargets() {
+        departureButton.addTarget(self,
+                                  action: #selector(handleDepartureButtonTapped),
+                                  for: .touchUpInside)
+        arrivalButton.addTarget(self,
+                              action: #selector(handleArrivalButtonTapped),
+                              for: .touchUpInside)
+    }
+    
+    @objc func handleDepartureButtonTapped() {
+        delegate?.didTappedSelectDepartureStation()
+    }
+    
+    @objc func handleArrivalButtonTapped() {
+        delegate?.didTappedSelectArrivalStation()
     }
 }
 
 // MARK: - UI Factoring
-extension CitiesInputView {
+extension StationsInputView {
     private func makeButton(placeholder: String) -> UIButton {
         let button = UIButton()
         button.setTitle(placeholder,
@@ -106,9 +125,9 @@ extension CitiesInputView {
     }
     
     private func makeStackView() -> UIStackView {
-        let stackView = UIStackView(arrangedSubviews: [departureTextField,
+        let stackView = UIStackView(arrangedSubviews: [departureButton,
                                                        lineView,
-                                                       arrivalTextField])
+                                                       arrivalButton])
         stackView.axis = .vertical
         stackView.spacing = 8
         stackView.alignment = .fill

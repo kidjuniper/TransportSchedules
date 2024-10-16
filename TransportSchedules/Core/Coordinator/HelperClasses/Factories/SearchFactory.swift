@@ -10,7 +10,8 @@ import Foundation
 final class SearchFactory: SearchFactoryProtocol {
     func makeSearchViewController(withCoordinator coordinator: SearchCoordinatorProtocol) -> SearchViewController {
         let viewController = SearchViewController()
-        viewController.presenter = SearchPresenter(viewController: viewController)
+        viewController.presenter = SearchPresenter(viewController: viewController,
+                                                   coordinator: coordinator)
         return viewController
     }
 }

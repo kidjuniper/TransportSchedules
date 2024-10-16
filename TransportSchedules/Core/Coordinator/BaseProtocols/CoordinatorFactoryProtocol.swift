@@ -11,4 +11,7 @@ protocol CoordinatorFactoryProtocol {
     func makeLoadingViewController(router: Routable,
                                    stationManager: StationListManagerProtocol) -> LoadingCoordinator
     func makeSearchCoordinator(router: Routable) -> SearchCoordinator
+    func makeStationsCoordinator(router: Routable,
+                                 stationManager: StationListManagerProtocol,
+                                 forArrival: Bool) -> StationsCoordinator
 }

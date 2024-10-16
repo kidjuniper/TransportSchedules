@@ -27,10 +27,18 @@ final class LoadingPresenter: LoadingViewOutputProtocol {
     
     func animationDidFinish() {
         coordinator.finishFlow?()
+        for i in stationListManager.returnCitiesList() {
+            if i.title == K.departureCityPlaceholder {
+                stationListManager.selectDepartureCity(city: i)
+            }
+            if i.title == K.arrivalCityPlaceholder {
+                stationListManager.selectArrivalCity(city: i)
+            }
+        }
     }
     
     func viewDidLoad() {
-        stationListManager.startStationLoading { result in
+        stationListManager.startLoading { result in
             if result {
                 self.viewController.stopAnimation()
             }

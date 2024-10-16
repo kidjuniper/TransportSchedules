@@ -16,7 +16,7 @@ protocol LoadingCoordinatorOutput: AnyObject {
     var finishFlow: CompletionBlock? { get set }
 }
 
-typealias LoadingCoordinatorProtocol = BaseCoordinator & SearchCoordinatorOutput
+typealias LoadingCoordinatorProtocol = BaseCoordinator & LoadingCoordinatorOutput
 
 final class LoadingCoordinator: LoadingCoordinatorProtocol {
     var finishFlow: CompletionBlock?
