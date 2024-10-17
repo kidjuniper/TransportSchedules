@@ -10,17 +10,15 @@
 
 - **UIKit, MVP + Coordinator**
 - **Alamofire + Interseptor**
-- **Lottie: Provides animated interactions for enhanced user experience**
-- **SnapKit: Simplifies Auto Layout using a clean, declarative syntax**
+- **Lottie**
+- **SnapKit**
 
 ## 🖼️ Скриншоты
 
-Take a look at some screenshots from the app in action:
-
 <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-  <img src="https://www.kidjuniper.ru/dir1.png" alt="Screenshot1" style="width: 120px; height: auto;"/>
-  <img src="https://www.kidjuniper.ru/dir2.png" alt="Screenshot1" style="width: 120px; height: auto;"/>
-  <img src="https://www.kidjuniper.ru/dir3.png" alt="Screenshot1" style="width: 120px; height: auto;"/>
-  <img src="https://www.kidjuniper.ru/dir4.png" alt="Screenshot1" style="width: 120px; height: auto;"/>
-  <img src="https://www.kidjuniper.ru/dir5.png" alt="Screenshot1" style="width: 120px; height: auto;"/>
+  <img src="https://www.kidjuniper.ru/dir1.png" alt="Screenshot1" style="width: 130px; height: auto;"/>
+  <img src="https://www.kidjuniper.ru/dir2.png" alt="Screenshot1" style="width: 130px; height: auto;"/>
+  <img src="https://www.kidjuniper.ru/dir3.png" alt="Screenshot1" style="width: 130px; height: auto;"/>
+  <img src="https://www.kidjuniper.ru/dir4.png" alt="Screenshot1" style="width: 130px; height: auto;"/>
+  <img src="https://www.kidjuniper.ru/dir5.png" alt="Screenshot1" style="width: 130px; height: auto;"/>
 </div>
