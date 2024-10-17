@@ -10,7 +10,8 @@ import UIKit
 
 final class Router: Routable {
     var toPresent: UIViewController?
-
+    var root: UIViewController?
+    
     private weak var navigationController: UINavigationController?
     
     init(navigationController: UINavigationController) {
@@ -20,9 +21,11 @@ final class Router: Routable {
     func setRootModule(_ module: Presentable?,
                        hideBar: Bool) {
         guard let controller = module?.toPresent else { return }
+        root = controller
+        toPresent = controller
         guard let navigationController = navigationController else { return }
         navigationController.setViewControllers([controller],
-                                                 animated: false)
+                                                animated: false)
         navigationController.isNavigationBarHidden = hideBar
     }
     
@@ -30,5 +33,17 @@ final class Router: Routable {
                        completion: CompletionBlock?) {
         navigationController?.dismiss(animated: animated,
                                       completion: completion)
+    }
+    
+    func presentModule(_ module: Presentable?,
+                       animated: Bool,
+                       completion: CompletionBlock?) {
+        guard let controller = module?.toPresent else { return }
+        guard let navigationController = navigationController else { return }
+        toPresent = controller
+        navigationController.modalPresentationStyle = .pageSheet
+        navigationController.present(controller,
+                                     animated: animated,
+                                     completion: completion)
     }
 }

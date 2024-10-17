@@ -62,7 +62,7 @@ extension DateSelectionView {
     }
     
     private func setUpStack() {
-        stackView.layer.cornerRadius = 8
+        stackView.layer.cornerRadius = K.defaultCornerRadius
         stackView.clipsToBounds = true
     }
     
@@ -105,8 +105,8 @@ extension DateSelectionView {
          dateButton].forEach { button in
             if button != highlightedButton {
                 button.backgroundColor = .lightGray
-                button.tintColor = .black
-                button.setTitleColor(.black,
+                button.tintColor = .accentText
+                button.setTitleColor(.accentText,
                                      for: .normal)
             }
             else {
@@ -154,7 +154,7 @@ extension DateSelectionView {
         button.setTitle("Завтра",
                         for: .normal)
         button.backgroundColor = .lightGray
-        button.setTitleColor(.black,
+        button.setTitleColor(.accentText,
                              for: .normal)
         button.clipsToBounds = true
         button.addTarget(self,
@@ -171,9 +171,9 @@ extension DateSelectionView {
                         for: .normal)
         button.setImage(UIImage(systemName: "calendar"),
                         for: .normal)
-        button.tintColor = .black
+        button.tintColor = .accentText
         button.backgroundColor = .lightGray
-        button.setTitleColor(.black,
+        button.setTitleColor(.accentText,
                              for: .normal)
         button.clipsToBounds = true
         button.addTarget(self,

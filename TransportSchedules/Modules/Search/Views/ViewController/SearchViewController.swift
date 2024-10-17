@@ -13,6 +13,8 @@ protocol SearchViewInputProtocol: AnyObject,
                                  UICollectionViewDelegate,
                                  UICollectionViewDelegateFlowLayout {
     func updateSelectedTransport()
+    func setArrivalCityTitle(_ title: String)
+    func setDepartureCityTitle(_ title: String)
 }
 
 final class SearchViewController: UIViewController {
@@ -38,12 +40,20 @@ final class SearchViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .bgYellow
         setUp()
     }
 }
 
 extension SearchViewController: SearchViewInputProtocol {
+    func setArrivalCityTitle(_ title: String) {
+        citiesSelectionView.setArrivalCIty(title)
+    }
+    
+    func setDepartureCityTitle(_ title: String) {
+        citiesSelectionView.setDepartureCIty(title)
+    }
+    
     func updateSelectedTransport() {
         transportCollection.reloadData()
     }
@@ -71,6 +81,20 @@ extension SearchViewController: DateSelectionDelegate {
             makeDateSelectorWide()
         }
         presenter?.didSelectedDate(date: option.localizedDate)
+    }
+}
+
+extension SearchViewController: StationsSelectionDelegate {
+    func swap() {
+        presenter?.swap()
+    }
+    
+    func didTappedSelectArrivalStation() {
+        presenter?.didTappedArrivalStation()
+    }
+    
+    func didTappedSelectDepartureStation() {
+        presenter?.didTappedDepartureStation()
     }
 }
 
@@ -114,7 +138,7 @@ extension SearchViewController {
         }
         
         animationView.snp.makeConstraints { make in
-            make.height.equalToSuperview().dividedBy(2)
+            make.height.equalTo(300)
             make.width.equalToSuperview()
         }
         
@@ -152,16 +176,18 @@ extension SearchViewController {
 extension SearchViewController {
     private func makeLabel() -> UILabel {
         let label = UILabel()
-        label.text = "Расписание пригородного и \nмеждугородного транспорта"
-        label.font = .systemFont(ofSize: 18,
-                                 weight: .bold)
+        label.text = "Расписание пригородного и \nмеждугородного транспорта:"
+        label.font = K.mainBoldFont
+        label.textAlignment = .left
         label.numberOfLines = 0
+        label.textColor = .accentText
         return label
     }
     
-    private func makeCitiesSelectionView() -> CitiesInputView {
-        let citiesSelector = CitiesInputView()
-        return citiesSelector
+    private func makeCitiesSelectionView() -> StationsInputView {
+        let stationsSelector = StationsInputView()
+        stationsSelector.delegate = self
+        return stationsSelector
     }
     
     private func makeDateSelectionView() -> DateSelectionView {
@@ -179,17 +205,18 @@ extension SearchViewController {
                                          forCellWithReuseIdentifier: TextTransportCollectionViewCell.cellId)
         transportCollectionView.register(ImageOfTransportCollectionViewCell.self,
                                          forCellWithReuseIdentifier: ImageOfTransportCollectionViewCell.cellId)
+        transportCollectionView.backgroundColor = .clear
         return transportCollectionView
     }
     
     private func makeSearchButton() -> UIButton {
         let searchButton = UIButton(type: .system)
-        searchButton.setTitle("Найти",
+        searchButton.setBigTitle("Найти",
                               for: .normal)
-        searchButton.setTitleColor(.darkGray,
+        searchButton.setTitleColor(.accentText,
                                    for: .normal)
         searchButton.backgroundColor = .customYellow
-        searchButton.layer.cornerRadius = 10
+        searchButton.layer.cornerRadius = K.defaultCornerRadius
         searchButton.clipsToBounds = true
         searchButton.addTarget(self,
                                action: #selector(searchButtonTapped),

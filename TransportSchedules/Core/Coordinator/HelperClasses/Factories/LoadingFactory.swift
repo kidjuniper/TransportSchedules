@@ -8,10 +8,12 @@
 import Foundation
 
 final class LoadingFactory: LoadingFactoryProtocol {
-    func makeLoadingViewController(withCoordinator coordinator: LoadingCoordinatorProtocol) -> LoadingViewController {
+    func makeLoadingViewController(withCoordinator coordinator: LoadingCoordinatorProtocol,
+                                   stationListManager: StationListManagerProtocol) -> LoadingViewController {
         let viewController = LoadingViewController()
         viewController.presenter = LoadingPresenter(coordinator: coordinator,
-                                                    viewController: viewController)
+                                                    viewController: viewController,
+                                                    stationListManager: stationListManager)
         return viewController
     }
 }

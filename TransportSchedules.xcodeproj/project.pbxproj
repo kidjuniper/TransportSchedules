@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A469967B2CBEDDAA0073878E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A469967A2CBEDDAA0073878E /* SnapKit */; };
 		A46996A32CBF2DF40073878E /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = A46996A22CBF2DF40073878E /* Lottie */; };
+		A46997832CBFE9FB0073878E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A46997822CBFE9FB0073878E /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A46997832CBFE9FB0073878E /* Alamofire in Frameworks */,
 				A469967B2CBEDDAA0073878E /* SnapKit in Frameworks */,
 				A46996A32CBF2DF40073878E /* Lottie in Frameworks */,
 			);
@@ -112,6 +114,7 @@
 			packageProductDependencies = (
 				A469967A2CBEDDAA0073878E /* SnapKit */,
 				A46996A22CBF2DF40073878E /* Lottie */,
+				A46997822CBFE9FB0073878E /* Alamofire */,
 			);
 			productName = TransportSchedules;
 			productReference = A457B15D2CBE6C0600FD91DA /* TransportSchedules.app */;
@@ -171,6 +174,7 @@
 			packageReferences = (
 				A46996792CBEDDAA0073878E /* XCRemoteSwiftPackageReference "SnapKit" */,
 				A46996A12CBF2DF40073878E /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				A46997812CBFE9FB0073878E /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A457B15E2CBE6C0600FD91DA /* Products */;
@@ -233,6 +237,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83A3HB7D55;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TransportSchedules/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
@@ -265,6 +270,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83A3HB7D55;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TransportSchedules/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
@@ -494,6 +500,14 @@
 				minimumVersion = 4.5.0;
 			};
 		};
+		A46997812CBFE9FB0073878E /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -506,6 +520,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A46996A12CBF2DF40073878E /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		A46997822CBFE9FB0073878E /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A46997812CBFE9FB0073878E /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

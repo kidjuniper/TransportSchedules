@@ -8,14 +8,15 @@
 import Foundation
 
 protocol LoadingFactoryProtocol {
-    func makeLoadingViewController(withCoordinator: LoadingCoordinatorProtocol) -> LoadingViewController
+    func makeLoadingViewController(withCoordinator coordinator: LoadingCoordinatorProtocol,
+                                   stationListManager: StationListManagerProtocol) -> LoadingViewController
 }
 
 protocol LoadingCoordinatorOutput: AnyObject {
     var finishFlow: CompletionBlock? { get set }
 }
 
-typealias LoadingCoordinatorProtocol = BaseCoordinator & SearchCoordinatorOutput
+typealias LoadingCoordinatorProtocol = BaseCoordinator & LoadingCoordinatorOutput
 
 final class LoadingCoordinator: LoadingCoordinatorProtocol {
     var finishFlow: CompletionBlock?
@@ -23,17 +24,21 @@ final class LoadingCoordinator: LoadingCoordinatorProtocol {
     // MARK: - Private Properties
     fileprivate let factory: LoadingFactoryProtocol
     fileprivate let router: Routable
+    private let stationManager: StationListManagerProtocol
     
     // MARK: - Initializer
     init(router: Routable,
-         factory: LoadingFactoryProtocol) {
+         factory: LoadingFactoryProtocol,
+         stationManager: StationListManagerProtocol) {
         self.router = router
         self.factory = factory
+        self.stationManager = stationManager
     }
     
     // MARK: - Search Logic
     override func start() {
-        let loadingViewController = factory.makeLoadingViewController(withCoordinator: self)
+        let loadingViewController = factory.makeLoadingViewController(withCoordinator: self,
+                                                                      stationListManager: stationManager)
         router.setRootModule(loadingViewController,
                              hideBar: true)
     }
