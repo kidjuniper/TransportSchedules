@@ -31,7 +31,7 @@ final class ResultPresenter: NSObject {
 // MARK: - StationsViewOutputProtocol extension
 extension ResultPresenter: ResultViewOutputProtocol {
     func heightForRowAt(indexPath: IndexPath) -> CGFloat {
-        var requiredHeight = K.standartInset * 4
+        var requiredHeight = K.standartInset * 6
         let labelWidth = UIScreen.main.bounds.width / 4
         let fittingSize = CGSize(width: labelWidth,
                                  height: .greatestFiniteMagnitude)

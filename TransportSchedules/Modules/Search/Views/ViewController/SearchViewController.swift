@@ -13,6 +13,7 @@ protocol SearchViewInputProtocol: AnyObject,
                                  UICollectionViewDelegate,
                                  UICollectionViewDelegateFlowLayout {
     func updateSelectedTransport()
+    func showNothingFoundPopUp()
     func setArrivalCityTitle(_ title: String)
     func setDepartureCityTitle(_ title: String)
 }
@@ -46,6 +47,18 @@ final class SearchViewController: UIViewController {
 }
 
 extension SearchViewController: SearchViewInputProtocol {
+    func showNothingFoundPopUp() {
+        let alert = UIAlertController(title: "Прямых рейсов по вашему запросу не найдено",
+                                      message: nil,
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ок",
+                                      style: .default,
+                                      handler: nil))
+        present(alert,
+                animated: true,
+                completion: nil)
+    }
+    
     func setArrivalCityTitle(_ title: String) {
         citiesSelectionView.setArrivalCIty(title)
     }
