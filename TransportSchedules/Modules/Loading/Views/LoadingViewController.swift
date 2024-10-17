@@ -74,12 +74,16 @@ extension LoadingViewController {
 // MARK: - LoadingViewInputProtocol extension
 extension LoadingViewController: LoadingViewInputProtocol {
     func showError() {
+        loadingAnimationView.removeFromSuperview()
         view.addSubview(errorAnimationView)
         errorAnimationView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         errorAnimationView.loopMode = .loop
         errorAnimationView.play()
+        
+        labelAnimationManager.startCycling()
+        loadingLabel.text = "Возникла ошибка \nперезапустите приложение"
     }
     
     func stopAnimation() {

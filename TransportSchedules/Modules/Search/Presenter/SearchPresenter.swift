@@ -11,14 +11,19 @@ import UIKit
 protocol SearchViewOutputProtocol: AnyObject,
                                   UICollectionViewDataSource {
     func viewDidLoad()
+    
     func didTappedSearch()
     func didSelectedDate(date: Date)
+    func didSelectedTransport(atIndex: IndexPath)
+    
     func didTappedArrivalStation()
     func didTappedDepartureStation()
+    func swap()
+    
     func didSelectedArrivalCity(city: Settlement)
     func didSelectedDepartureCity(city: Settlement)
-    func swap()
-    func didSelectedTransport(atIndex: IndexPath)
+
+
     func collectionView(sizeForItemAt indexPath: IndexPath) -> CGSize
 }
 
@@ -30,6 +35,7 @@ final class SearchPresenter: NSObject {
     private var arrivalCity: Settlement?
     private var departureCity: Settlement?
     
+    // MARK: - Initializer
     init(viewController: SearchViewInputProtocol,
          coordinator: SearchCoordinatorProtocol,
          scheduleManager: ScheduleManagerProtocol,
@@ -57,6 +63,10 @@ final class SearchPresenter: NSObject {
 
 // MARK: - TransportViewOutputProtocol
 extension SearchPresenter: SearchViewOutputProtocol {
+    func viewDidLoad() {
+        setUpCities()
+    }
+    
     func swap() {
         stationListManager.swapCities()
         setUpCities()
@@ -79,17 +89,6 @@ extension SearchPresenter: SearchViewOutputProtocol {
     func didTappedDepartureStation() {
         coordinator.departureStationSelectionFlow?()
     }
-
-    func collectionView(sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch transportData[indexPath.row].type {
-        case .text:
-            return CGSize(width: K.textTransportCollectionViewCellWidth(forNumberOfItems: transportData.count),
-                          height: K.transportCollectionViewHeight)
-        case .image:
-            return CGSize(width: K.imageTransportCollectionViewCellWidth,
-                          height: K.transportCollectionViewHeight)
-        }
-    }
     
     func didSelectedTransport(atIndex index: IndexPath) {
         let transports = TransportType.allCases
@@ -106,10 +105,6 @@ extension SearchPresenter: SearchViewOutputProtocol {
         selectedDate = date
     }
     
-    func viewDidLoad() {
-        setUpCities()
-    }
-    
     private func setUpCities() {
         viewController?.setArrivalCityTitle(stationListManager.returnArrivalCity().title)
         viewController?.setDepartureCityTitle(stationListManager.returnDepartureCity().title)
@@ -122,10 +117,14 @@ extension SearchPresenter: SearchViewOutputProtocol {
                                        transport: selectedTransport) { result in
             switch result {
             case .success(let data):
-                self.coordinator.resultShowingFlow?()
-                print(data.count)
+                if data.isEmpty {
+                    self.viewController?.showNothingFoundPopUp()
+                }
+                else {
+                    self.coordinator.resultShowingFlow?()
+                }
             case .failure:
-                return
+                self.coordinator.resultShowingFlow?()
             }
         }
     }
@@ -142,5 +141,15 @@ extension SearchPresenter: SearchViewOutputProtocol {
                                                        indexPath: indexPath,
                                                        cellData: transportData[indexPath.row])
     }
+    
+    func collectionView(sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch transportData[indexPath.row].type {
+        case .text:
+            return CGSize(width: K.textTransportCollectionViewCellWidth(forNumberOfItems: transportData.count),
+                          height: K.transportCollectionViewHeight)
+        case .image:
+            return CGSize(width: K.imageTransportCollectionViewCellWidth,
+                          height: K.transportCollectionViewHeight)
+        }
+    }
 }
-

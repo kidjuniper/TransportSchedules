@@ -96,7 +96,6 @@ class ResultTableViewCell: UITableViewCell {
             make.width.equalTo(35)
             make.height.equalTo(35)
         }
-        
         arrivalTimeLabel.snp.makeConstraints { make in
             make.height.equalTo(20)
         }
@@ -138,7 +137,7 @@ extension ResultTableViewCell {
         let stack = UIStackView(arrangedSubviews: [iconImageView,
                                                    UIView()])
         stack.axis = .vertical
-        stack.distribution = .fillProportionally
+        stack.distribution = .fill
         stack.spacing = K.standartInset / 2
         return stack
     }
@@ -183,7 +182,7 @@ extension ResultTableViewCell {
                                                    transportLabel])
         stack.axis = .vertical
         stack.spacing = K.standartInset / 2
-        stack.distribution = .fillProportionally
+        stack.distribution = .fill
         return stack
     }
     
