@@ -12,6 +12,7 @@ import SnapKit
 // MARK: - Delegate Protocol
 protocol StationsSelectionDelegate: AnyObject {
     func didTappedSelectArrivalStation()
+    func swap()
     func didTappedSelectDepartureStation()
 }
 
@@ -96,6 +97,9 @@ extension StationsInputView {
         arrivalButton.addTarget(self,
                               action: #selector(handleArrivalButtonTapped),
                               for: .touchUpInside)
+        arrowButton.addTarget(self,
+                              action: #selector(handleSwipeButtonTapped),
+                              for: .touchUpInside)
     }
     
     @objc func handleDepartureButtonTapped() {
@@ -104,6 +108,10 @@ extension StationsInputView {
     
     @objc func handleArrivalButtonTapped() {
         delegate?.didTappedSelectArrivalStation()
+    }
+    
+    @objc func handleSwipeButtonTapped() {
+        delegate?.swap()
     }
 }
 

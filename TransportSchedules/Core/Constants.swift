@@ -54,6 +54,11 @@ struct Constants {
                                 size: 24)
     static let mainFont = UIFont(name: "YandexSansText-Regular",
                                  size: 18)
+    static let smallFont = UIFont(name: "YandexSansText-Regular",
+                                 size: 10)
     static let mainBoldFont = UIFont(name: "YandexSansText-Bold",
                                      size: 18)
+    
+    // MARK: - Other
+    static let defaultCornerRadius: CGFloat = 10
 }

@@ -8,6 +8,14 @@
 import Foundation
 
 final class CoordinatorFactory: CoordinatorFactoryProtocol {
+    func makeResultViewController(router: any Routable,
+                                  scheduleManager: any ScheduleManagerProtocol) -> ResultCoordinator {
+        let coordinator = ResultCoordinator(router: router,
+                                            factory: ResultFactory(),
+                                            scheduleManager: scheduleManager)
+        return coordinator
+    }
+    
     func makeLoadingViewController(router: Routable,
                                    stationManager: StationListManagerProtocol) -> LoadingCoordinator {
         let coordinator = LoadingCoordinator(router: router,
@@ -16,9 +24,13 @@ final class CoordinatorFactory: CoordinatorFactoryProtocol {
         return coordinator
     }
     
-    func makeSearchCoordinator(router: Routable) -> SearchCoordinator {
+    func makeSearchCoordinator(router: Routable,
+                               scheduleManager: ScheduleManagerProtocol,
+                               stationListManager: StationListManagerProtocol) -> SearchCoordinator {
         let coordinator = SearchCoordinator(router: router,
-                                          factory: SearchFactory())
+                                            factory: SearchFactory(),
+                                            scheduleManager: scheduleManager,
+                                            stationListManager: stationListManager)
         return coordinator
     }
     

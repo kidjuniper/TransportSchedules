@@ -12,6 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var coordinator: Coordinatable?
     
+    private let yandexAPIManager = YandexAPIManager()
     private let stationListManager = StationListManager(yandexAPIManager: YandexAPIManager())
 
     func scene(_ scene: UIScene,
@@ -30,9 +31,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func makeCoordinator(navigationController: UINavigationController) -> Coordinatable {
+        let stationListManager = StationListManager(yandexAPIManager: yandexAPIManager)
+        let scheduleManager = ScheduleManager(yandexAPIManager: yandexAPIManager,
+                                              stationManager: stationListManager)
         return AppCoordinator(router: Router(navigationController: navigationController),
                               factory: CoordinatorFactory(),
-                              stationListManager: stationListManager)
+                              stationListManager: stationListManager,
+                              scheduleManager: scheduleManager)
     }
 }
 

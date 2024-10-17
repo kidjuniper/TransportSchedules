@@ -15,12 +15,9 @@ protocol SearchViewOutputProtocol: AnyObject,
     func didSelectedDate(date: Date)
     func didTappedArrivalStation()
     func didTappedDepartureStation()
-    func didSelectedArrivalStation(station: Station)
-    func didSelectedDepartureStation(station: Station)
     func didSelectedArrivalCity(city: Settlement)
     func didSelectedDepartureCity(city: Settlement)
-    
-    
+    func swap()
     func didSelectedTransport(atIndex: IndexPath)
     func collectionView(sizeForItemAt indexPath: IndexPath) -> CGSize
 }
@@ -28,11 +25,19 @@ protocol SearchViewOutputProtocol: AnyObject,
 final class SearchPresenter: NSObject {
     private weak var viewController: SearchViewInputProtocol?
     private let coordinator: SearchCoordinatorProtocol
+    private let scheduleManager: ScheduleManagerProtocol
+    private let stationListManager: StationListManagerProtocol
+    private var arrivalCity: Settlement?
+    private var departureCity: Settlement?
     
     init(viewController: SearchViewInputProtocol,
-         coordinator: SearchCoordinatorProtocol) {
+         coordinator: SearchCoordinatorProtocol,
+         scheduleManager: ScheduleManagerProtocol,
+         stationListManager: StationListManagerProtocol) {
         self.viewController = viewController
         self.coordinator = coordinator
+        self.scheduleManager = scheduleManager
+        self.stationListManager = stationListManager
     }
     
     // MARK: - Privat Properties
@@ -47,24 +52,24 @@ final class SearchPresenter: NSObject {
             viewController?.updateSelectedTransport()
         }
     }
+    private var selectedTransport: TransportType?
 }
 
 // MARK: - TransportViewOutputProtocol
 extension SearchPresenter: SearchViewOutputProtocol {
-    func didSelectedArrivalStation(station: Station) {
-        viewController?.setArrivalCityTitle(station.title)
-    }
-    
-    func didSelectedDepartureStation(station: Station) {
-        viewController?.setDepartureCityTitle(station.title)
+    func swap() {
+        stationListManager.swapCities()
+        setUpCities()
     }
     
     func didSelectedArrivalCity(city: Settlement) {
         viewController?.setArrivalCityTitle(city.title)
+        arrivalCity = city
     }
     
     func didSelectedDepartureCity(city: Settlement) {
         viewController?.setDepartureCityTitle(city.title)
+        departureCity = city
     }
     
     func didTappedArrivalStation() {
@@ -87,7 +92,14 @@ extension SearchPresenter: SearchViewOutputProtocol {
     }
     
     func didSelectedTransport(atIndex index: IndexPath) {
+        let transports = TransportType.allCases
         selectedTransportId = index.row
+        if selectedTransportId > 0 {
+            selectedTransport = transports[selectedTransportId - 1]
+        }
+        else {
+            selectedTransport = nil
+        }
     }
     
     func didSelectedDate(date: Date) {
@@ -95,11 +107,27 @@ extension SearchPresenter: SearchViewOutputProtocol {
     }
     
     func viewDidLoad() {
+        setUpCities()
+    }
+    
+    private func setUpCities() {
+        viewController?.setArrivalCityTitle(stationListManager.returnArrivalCity().title)
+        viewController?.setDepartureCityTitle(stationListManager.returnDepartureCity().title)
     }
     
     func didTappedSearch() {
-        print(selectedDate,
-              selectedTransportId)
+        let isoFormatter = ISO8601DateFormatter()
+        let iso8601String = isoFormatter.string(from: selectedDate)
+        scheduleManager.requestThreads(date: iso8601String,
+                                       transport: selectedTransport) { result in
+            switch result {
+            case .success(let data):
+                self.coordinator.resultShowingFlow?()
+                print(data.count)
+            case .failure:
+                return
+            }
+        }
     }
     
     // CollectionView related

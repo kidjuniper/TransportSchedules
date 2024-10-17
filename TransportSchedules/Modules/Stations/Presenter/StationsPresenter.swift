@@ -47,6 +47,7 @@ extension StationsPresenter: StationsViewOutputProtocol {
     
     func filterData(with text: String) {
         filteredCities = stationsListManager.returnCitiesList().filter { text.isEmpty ? true : $0.title.lowercased().contains(text.lowercased())}
+        filteredCities.sort { $0.stations.count > $1.stations.count }
         viewController.reloadSearch()
     }
     

@@ -8,11 +8,14 @@
 import Foundation
 
 protocol SearchFactoryProtocol {
-    func makeSearchViewController(withCoordinator coordinator: SearchCoordinatorProtocol) -> SearchViewController
+    func makeSearchViewController(withCoordinator coordinator: SearchCoordinatorProtocol,
+                                  scheduleManager: ScheduleManagerProtocol,
+                                  stationListManager: StationListManagerProtocol) -> SearchViewController
 }
 
 protocol SearchCoordinatorOutput: AnyObject {
     var finishFlow: CompletionBlock? { get set }
+    var resultShowingFlow: CompletionBlock? { get set }
     var arrivingStationSelectionFlow: CompletionBlock? { get set }
     var departureStationSelectionFlow: CompletionBlock? { get set }
 }
@@ -20,24 +23,34 @@ protocol SearchCoordinatorOutput: AnyObject {
 typealias SearchCoordinatorProtocol = BaseCoordinator & SearchCoordinatorOutput
 
 final class SearchCoordinator: SearchCoordinatorProtocol {
-    var finishFlow: CompletionBlock?
+    var resultShowingFlow: CompletionBlock?
     
     var arrivingStationSelectionFlow: CompletionBlock?
     var departureStationSelectionFlow: CompletionBlock?
     
+    var finishFlow: CompletionBlock?
+    
     // MARK: - Private Properties
     fileprivate let factory: SearchFactoryProtocol
     fileprivate let router: Routable
+    fileprivate let scheduleManager: ScheduleManagerProtocol
+    fileprivate let stationListManager: StationListManagerProtocol
     
     // MARK: - Initializer
     init(router: Routable,
-         factory: SearchFactoryProtocol) {
+         factory: SearchFactoryProtocol,
+         scheduleManager: ScheduleManagerProtocol,
+         stationListManager: StationListManagerProtocol) {
         self.router = router
         self.factory = factory
+        self.scheduleManager = scheduleManager
+        self.stationListManager = stationListManager
     }
     
     override func start() {
-        let stationSelectionVC = factory.makeSearchViewController(withCoordinator: self)
+        let stationSelectionVC = factory.makeSearchViewController(withCoordinator: self,
+                                                                  scheduleManager: scheduleManager,
+                                                                  stationListManager: stationListManager)
         router.setRootModule(stationSelectionVC,
                              hideBar: true)
     }

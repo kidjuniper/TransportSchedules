@@ -85,6 +85,10 @@ extension SearchViewController: DateSelectionDelegate {
 }
 
 extension SearchViewController: StationsSelectionDelegate {
+    func swap() {
+        presenter?.swap()
+    }
+    
     func didTappedSelectArrivalStation() {
         presenter?.didTappedArrivalStation()
     }

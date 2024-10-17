@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 protocol StationsViewInputProtocol {
-    func showSelectedCity(cityName: String)
     func reloadSearch()
     func hideKeyboard()
 }
@@ -98,10 +97,6 @@ extension StationsViewController: StationsViewInputProtocol {
     
     func reloadSearch() {
         citiesTableView.reloadData()
-    }
-    
-    func showSelectedCity(cityName: String) {
-        selectedCityTextField.text = cityName
     }
 }
 

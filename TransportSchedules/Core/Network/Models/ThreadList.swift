@@ -1,5 +1,5 @@
 //
-//  RoutesList.swift
+//  ThreadList.swift
 //  TransportSchedules
 //
 //  Created by Nikita Stepanov on 17.10.2024.
@@ -8,10 +8,13 @@
 import Foundation
 
 // MARK: - Welcome
-struct RoutesList: Codable {
-    let search: Search
-    let segments: [Segment]
-    let pagination: Pagination
+struct ThreadList: Codable {
+    @DefaultEmptyEntity
+    var search: Search
+    @DefaultEmptyArray
+    var segments: [Segment]
+    @DefaultEmptyEntity
+    var pagination: Pagination
 
     enum CodingKeys: String,
                      CodingKey {
@@ -22,26 +25,60 @@ struct RoutesList: Codable {
 }
 
 // MARK: - Pagination
-struct Pagination: Codable {
-    let total,
-        limit,
-        offset: Int
+struct Pagination: Codable,
+                   DefaultInitializable {
+    init() {
+        total = 0
+        limit = 0
+        offset = 0
+    }
+    
+    @DefaultInt
+    var total: Int
+    @DefaultInt
+    var limit: Int
+    @DefaultInt
+    var offset: Int
 }
 
 // MARK: - Search
-struct Search: Codable {
-    let from,
-        to: SearchFrom
-    let date: String
+struct Search: Codable,
+               DefaultInitializable {
+    @DefaultEmptyEntity
+    var from: SearchFrom
+    @DefaultEmptyEntity
+    var to: SearchFrom
+    @DefaultEmptyString
+    var date: String
+    
+    init() {
+        date = ""
+        from = SearchFrom()
+        to = SearchFrom()
+    }
 }
 
 // MARK: - SearchFrom
-struct SearchFrom: Codable {
-    let type,
-        title,
-        shortTitle,
-        popularTitle: String
-    let code: String
+struct SearchFrom: Codable,
+                   DefaultInitializable {
+    init() {
+        type = ""
+        title = ""
+        shortTitle = ""
+        popularTitle = ""
+        code = ""
+    }
+    
+    @DefaultEmptyString
+    var type: String
+    @DefaultEmptyString
+    var title: String
+    @DefaultEmptyString
+    var shortTitle: String
+    @DefaultEmptyString
+    var popularTitle: String
+    @DefaultEmptyString
+    var code: String
 
     enum CodingKeys: String,
                      CodingKey {
@@ -56,22 +93,26 @@ struct SearchFrom: Codable {
 // MARK: - Segment
 struct Segment: Codable {
     let thread: Thread
-    let stops: String
-    let from, to: SegmentFrom
-    let departurePlatform,
-        arrivalPlatform: String
-    let duration: Int
-    let hasTransfers: Bool
+    @DefaultEmptyString
+    var stops: String
+    var from: SegmentFrom
+    var to: SegmentFrom
+    @DefaultEmptyString
+    var departurePlatform: String
+    @DefaultEmptyString
+    var arrivalPlatform: String
+    @DefaultInt
+    var duration: Int
     let departure,
-        arrival: Date
-    let startDate: String
+        arrival: String
+    @DefaultEmptyString
+    var startDate: String
 
     enum CodingKeys: String, CodingKey {
         case thread, stops, from, to
         case departurePlatform = "departure_platform"
         case arrivalPlatform = "arrival_platform"
         case duration
-        case hasTransfers = "has_transfers"
         case departure, arrival
         case startDate = "start_date"
     }
@@ -80,10 +121,14 @@ struct Segment: Codable {
 // MARK: - SegmentFrom
 struct SegmentFrom: Codable {
     let type: TypeEnum
-    let title: String
-    let shortTitle: String?
-    let popularTitle,
-        code: String
+    @DefaultEmptyString
+    var title: String
+    @DefaultEmptyString
+    var shortTitle: String
+    @DefaultEmptyString
+    var popularTitle: String
+    @DefaultEmptyString
+    var code: String
     let transportType: TransportType
 
     enum CodingKeys: String, CodingKey {
@@ -96,16 +141,19 @@ struct SegmentFrom: Codable {
     }
 }
 
+// MARK: - TransportType
 enum TransportType: String,
-                    Codable {
-    case plane = "самолет"
-    case train = "поезд"
-    case suburban = "электричка"
-    case bus = "автобус"
-    case water = "водный транспорт"
-    case helicopter = "вертолет"
+                    Codable,
+                    CaseIterable {
+    case plane
+    case train
+    case suburban
+    case bus
+    case water
+    case helicopter
 }
 
+// MARK: - TypeEnum
 enum TypeEnum: String,
                Codable {
     case station = "station"
@@ -113,39 +161,36 @@ enum TypeEnum: String,
 
 // MARK: - Thread
 struct Thread: Codable {
-    let number,
-        title,
-        shortTitle: String
+    @DefaultEmptyString
+    var number: String
+    @DefaultEmptyString
+    var title: String
+    @DefaultEmptyString
+    var shortTitle: String
     let transportType: TransportType
     let carrier: Carrier?
-    let uid: String
-    let vehicle: String
+    @DefaultEmptyString
+    var vehicle: String
+    let transportSubtype: TransportSubtype
 
     enum CodingKeys: String, CodingKey {
         case number,
              title
         case shortTitle = "short_title"
         case transportType = "transport_type"
+        case transportSubtype = "transport_subtype"
         case carrier,
-             uid,
              vehicle
     }
 }
 
+// MARK: - TransportSubtype
+struct TransportSubtype: Codable {
+    @DefaultEmptyString
+    var title: String
+}
+
 // MARK: - Carrier
 struct Carrier: Codable {
-    let code: Int
     let title: String
-    let url: String
-    let contacts,
-        phone: String
-
-    enum CodingKeys: String,
-                     CodingKey {
-        case code,
-             title,
-             url,
-             contacts,
-             phone
-    }
 }

@@ -13,9 +13,8 @@ protocol StationListManagerProtocol {
     func returnCitiesList() -> [Settlement]
     func returnArrivalCity() -> Settlement
     func returnDepartureCity() -> Settlement
-    func returnStationsForArrival() -> [Station]
-    func returnStationsForDeparture() -> [Station]
     func startLoading(completion: @escaping (Bool) -> Void)
+    func swapCities()
 }
 
 final class StationListManager {
@@ -37,6 +36,12 @@ final class StationListManager {
 
 // MARK: - GenerationManagerProtocol extension
 extension StationListManager: StationListManagerProtocol {
+    func swapCities() {
+        let newArrival = departure
+        departure = arrival
+        arrival = newArrival
+    }
+    
     func returnArrivalCity() -> Settlement {
         return arrival
     }
@@ -57,14 +62,6 @@ extension StationListManager: StationListManagerProtocol {
         departure = city
     }
     
-    func returnStationsForArrival() -> [Station] {
-        arrival.stations
-    }
-    
-    func returnStationsForDeparture() -> [Station] {
-        departure.stations
-    }
-    
     func startLoading(completion: @escaping (Bool) -> Void) {
         yandexAPIManager.requestStations { result in
             switch result {
@@ -81,6 +78,7 @@ extension StationListManager: StationListManagerProtocol {
         for i in data.countries {
             for j in i.regions {
                 for k in j.settlements {
+                    if k.title.isEmpty { continue }
                     lastFindedCities.append(k)
                 }
             }

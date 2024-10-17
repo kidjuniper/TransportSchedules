@@ -68,6 +68,11 @@ public struct DefaultDoubleStrategy: DefaultCodableStrategy {
 }
 public typealias DefaultDouble = DefaultCodable<DefaultDoubleStrategy>
 
+public struct DefaultIntStrategy: DefaultCodableStrategy {
+    public static var defaultValue: Int { return 0 }
+}
+public typealias DefaultInt = DefaultCodable<DefaultIntStrategy>
+
 // For Structs and Classes with default init():
 public protocol DefaultInitializable: Codable {
     init()
