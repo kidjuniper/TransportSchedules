@@ -19,6 +19,6 @@
   <img src="https://www.kidjuniper.ru/dir1.png" alt="Screenshot1" style="width: 130px; height: auto;"/>
   <img src="https://www.kidjuniper.ru/dir2.png" alt="Screenshot1" style="width: 130px; height: auto;"/>
   <img src="https://www.kidjuniper.ru/dir3.png" alt="Screenshot1" style="width: 130px; height: auto;"/>
-  <img src="https://www.kidjuniper.ru/dir4.png" alt="Screenshot1" style="width: 130px; height: auto;"/>
+  <img src="https://www.kidjuniper.ru/dir6.png" alt="Screenshot1" style="width: 130px; height: auto;"/>
   <img src="https://www.kidjuniper.ru/dir5.png" alt="Screenshot1" style="width: 130px; height: auto;"/>
 </div>
