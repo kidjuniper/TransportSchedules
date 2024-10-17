@@ -23,12 +23,10 @@ final class CoordinatorFactory: CoordinatorFactoryProtocol {
     }
     
     func makeStationsCoordinator(router: Routable,
-                                 stationManager: StationListManagerProtocol,
-                                 forArrival: Bool) -> StationsCoordinator {
+                                 stationManager: StationListManagerProtocol) -> StationsCoordinator {
         let coordinator = StationsCoordinator(router: router,
                                               factory: StationsFactory(),
-                                              stationManager: stationManager,
-                                              forArrival: forArrival)
+                                              stationManager: stationManager)
         return coordinator
     }
 }

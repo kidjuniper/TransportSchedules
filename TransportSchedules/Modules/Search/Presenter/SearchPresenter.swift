@@ -14,9 +14,13 @@ protocol SearchViewOutputProtocol: AnyObject,
     func didTappedSearch()
     func didSelectedDate(date: Date)
     func didTappedArrivalStation()
-    func didSelectedArrivalStation(station: Station)
     func didTappedDepartureStation()
+    func didSelectedArrivalStation(station: Station)
     func didSelectedDepartureStation(station: Station)
+    func didSelectedArrivalCity(city: Settlement)
+    func didSelectedDepartureCity(city: Settlement)
+    
+    
     func didSelectedTransport(atIndex: IndexPath)
     func collectionView(sizeForItemAt indexPath: IndexPath) -> CGSize
 }
@@ -48,11 +52,19 @@ final class SearchPresenter: NSObject {
 // MARK: - TransportViewOutputProtocol
 extension SearchPresenter: SearchViewOutputProtocol {
     func didSelectedArrivalStation(station: Station) {
-        
+        viewController?.setArrivalCityTitle(station.title)
     }
     
     func didSelectedDepartureStation(station: Station) {
-        
+        viewController?.setDepartureCityTitle(station.title)
+    }
+    
+    func didSelectedArrivalCity(city: Settlement) {
+        viewController?.setArrivalCityTitle(city.title)
+    }
+    
+    func didSelectedDepartureCity(city: Settlement) {
+        viewController?.setDepartureCityTitle(city.title)
     }
     
     func didTappedArrivalStation() {

@@ -9,15 +9,12 @@ import Foundation
 
 final class StationsFactory: StationsFactoryProtocol {
     func makeStationsViewController(withCoordinator coordinator: StationsCoordinatorProtocol,
-                                   stationListManager: StationListManagerProtocol,
-                                    forArrival: Bool) -> StationsViewController {
+                                   stationListManager: StationListManagerProtocol) -> StationsViewController {
         let viewController = StationsViewController()
-        print(forArrival)
         let presenter = StationsPresenter(stationsListManager: stationListManager,
-                                          isArrival: forArrival)
-//        viewController.presenter = StationsViewController(coordinator: coordinator,
-//                                                    viewController: viewController,
-//                                                    stationListManager: stationListManager)
+                                          viewController: viewController,
+                                          coordinator: coordinator)
+        viewController.presenter = presenter
         return viewController
     }
 }

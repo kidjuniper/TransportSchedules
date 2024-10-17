@@ -9,39 +9,34 @@ import Foundation
 
 protocol StationsFactoryProtocol {
     func makeStationsViewController(withCoordinator coordinator: StationsCoordinatorProtocol,
-                                   stationListManager: StationListManagerProtocol,
-                                    forArrival: Bool) -> StationsViewController
+                                   stationListManager: StationListManagerProtocol) -> StationsViewController
 }
 
 protocol StationsCoordinatorOutput: AnyObject {
-    var finishFlow: ((Station) -> Void)? { get set }
+    var finishFlow: ((Settlement) -> Void)? { get set }
 }
 
 typealias StationsCoordinatorProtocol = BaseCoordinator & StationsCoordinatorOutput
 
 final class StationsCoordinator: StationsCoordinatorProtocol {
-    var finishFlow: ((Station) -> Void)?
+    var finishFlow: ((Settlement) -> Void)?
     
     // MARK: - Properties
     private let router: Routable
     private let factory: StationsFactoryProtocol
     private let stationManager: StationListManagerProtocol
-    private let forArrival: Bool
 
     init(router: Routable,
          factory: StationsFactoryProtocol,
-         stationManager: StationListManagerProtocol,
-         forArrival: Bool) {
+         stationManager: StationListManagerProtocol) {
         self.router = router
         self.factory = factory
         self.stationManager = stationManager
-        self.forArrival = forArrival
     }
 
     override func start() {
         let stationSelectionVC = factory.makeStationsViewController(withCoordinator: self,
-                                                                    stationListManager: stationManager,
-                                                                    forArrival: forArrival)
+                                                                    stationListManager: stationManager)
         router.presentModule(stationSelectionVC,
                              animated: true,
                              completion: nil)

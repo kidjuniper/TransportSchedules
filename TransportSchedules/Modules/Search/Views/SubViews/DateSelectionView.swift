@@ -62,7 +62,7 @@ extension DateSelectionView {
     }
     
     private func setUpStack() {
-        stackView.layer.cornerRadius = 8
+        stackView.layer.cornerRadius = K.defaultCornerRadius
         stackView.clipsToBounds = true
     }
     

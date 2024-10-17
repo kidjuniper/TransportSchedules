@@ -16,7 +16,7 @@ final class AppCoordinator: BaseCoordinator {
     init(router: Routable,
          factory: CoordinatorFactoryProtocol,
          stationListManager: StationListManagerProtocol) {
-        self.router  = router
+        self.router = router
         self.factory = factory
         self.stationListManager = stationListManager
     }
@@ -30,15 +30,21 @@ private extension AppCoordinator {
     func showLoadingScreen() {
         let coordinator = factory.makeLoadingViewController(router: router,
                                                             stationManager: stationListManager)
-        coordinator.finishFlow = { [weak self] in
-            guard let self = self else { return }
+        addChildCoordinator(coordinator)
+        
+        coordinator.finishFlow = { [weak self,
+                                    weak coordinator] in
+            guard let self = self, let coordinator = coordinator else { return }
+            self.removeChildCoordinator(coordinator)
             self.showSearchScreen()
         }
+        
         coordinator.start()
     }
     
     func showSearchScreen() {
         let coordinator = factory.makeSearchCoordinator(router: router)
+        addChildCoordinator(coordinator)
         
         coordinator.arrivingStationSelectionFlow = { [weak self] in
             guard let self = self else { return }
@@ -50,24 +56,35 @@ private extension AppCoordinator {
             self.showStationSelection(forArrival: false)
         }
         
+        coordinator.finishFlow = { [weak self,
+                                    weak coordinator] in
+            guard let self = self,
+                  let coordinator = coordinator else { return }
+            self.removeChildCoordinator(coordinator)
+        }
+        
         coordinator.start()
     }
     
     func showStationSelection(forArrival: Bool) {
         let coordinator = factory.makeStationsCoordinator(router: router,
-                                                          stationManager: stationListManager,
-                                                          forArrival: forArrival)
-        coordinator.finishFlow = { [weak self] station in
-            guard let self = self else { return }
-            if let searchViewController = self.router.presenting as? SearchViewController {
+                                                          stationManager: stationListManager)
+        addChildCoordinator(coordinator)
+        
+        coordinator.finishFlow = { [weak self,
+                                    weak coordinator] city in
+            guard let self = self, let coordinator = coordinator else { return }
+            if let searchViewController = self.router.root as? SearchViewController {
                 if forArrival {
-                    searchViewController.presenter?.didSelectedArrivalStation(station: station)
+                    searchViewController.presenter?.didSelectedArrivalCity(city: city)
+                } else {
+                    searchViewController.presenter?.didSelectedDepartureCity(city: city)
                 }
-                else {
-                    searchViewController.presenter?.didSelectedDepartureStation(station: station)
-                }
+                router.dismissModule(animated: true) {}
             }
+            self.removeChildCoordinator(coordinator)
         }
+        
         coordinator.start()
     }
 }

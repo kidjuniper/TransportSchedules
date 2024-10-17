@@ -34,6 +34,16 @@ class StationsInputView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    public func setArrivalCIty(_ city: String) {
+        arrivalButton.setTitle(city,
+                               for: .normal)
+    }
+    
+    public func setDepartureCIty(_ city: String) {
+        departureButton.setTitle(city,
+                                 for: .normal)
+    }
 }
 
 // MARK: - Private Funcs
@@ -48,7 +58,7 @@ extension StationsInputView {
     private func setUpAppearance() {
         layer.borderWidth = 1
         layer.borderColor = UIColor.lightGray.cgColor
-        layer.cornerRadius = 10
+        layer.cornerRadius = K.defaultCornerRadius
         backgroundColor = .white
         clipsToBounds = true
     }

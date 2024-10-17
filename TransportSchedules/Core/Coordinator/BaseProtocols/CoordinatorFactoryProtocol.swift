@@ -12,6 +12,5 @@ protocol CoordinatorFactoryProtocol {
                                    stationManager: StationListManagerProtocol) -> LoadingCoordinator
     func makeSearchCoordinator(router: Routable) -> SearchCoordinator
     func makeStationsCoordinator(router: Routable,
-                                 stationManager: StationListManagerProtocol,
-                                 forArrival: Bool) -> StationsCoordinator
+                                 stationManager: StationListManagerProtocol) -> StationsCoordinator
 }

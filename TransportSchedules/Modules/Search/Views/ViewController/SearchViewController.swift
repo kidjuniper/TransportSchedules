@@ -13,6 +13,8 @@ protocol SearchViewInputProtocol: AnyObject,
                                  UICollectionViewDelegate,
                                  UICollectionViewDelegateFlowLayout {
     func updateSelectedTransport()
+    func setArrivalCityTitle(_ title: String)
+    func setDepartureCityTitle(_ title: String)
 }
 
 final class SearchViewController: UIViewController {
@@ -44,6 +46,14 @@ final class SearchViewController: UIViewController {
 }
 
 extension SearchViewController: SearchViewInputProtocol {
+    func setArrivalCityTitle(_ title: String) {
+        citiesSelectionView.setArrivalCIty(title)
+    }
+    
+    func setDepartureCityTitle(_ title: String) {
+        citiesSelectionView.setDepartureCIty(title)
+    }
+    
     func updateSelectedTransport() {
         transportCollection.reloadData()
     }
@@ -202,7 +212,7 @@ extension SearchViewController {
         searchButton.setTitleColor(.accentText,
                                    for: .normal)
         searchButton.backgroundColor = .customYellow
-        searchButton.layer.cornerRadius = 10
+        searchButton.layer.cornerRadius = K.defaultCornerRadius
         searchButton.clipsToBounds = true
         searchButton.addTarget(self,
                                action: #selector(searchButtonTapped),

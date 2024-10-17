@@ -11,7 +11,7 @@ import UIKit
 typealias CompletionBlock = () -> Void
 
 protocol Routable: Presentable {
-    var presenting: UIViewController? { get }
+    var root: UIViewController? { get }
     
     func setRootModule(_ module: Presentable?,
                        hideBar: Bool)
