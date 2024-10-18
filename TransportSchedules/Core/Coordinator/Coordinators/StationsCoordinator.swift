@@ -25,7 +25,8 @@ final class StationsCoordinator: StationsCoordinatorProtocol {
     private let router: Routable
     private let factory: StationsFactoryProtocol
     private let stationManager: StationListManagerProtocol
-
+    
+    // MARK: - Initializer
     init(router: Routable,
          factory: StationsFactoryProtocol,
          stationManager: StationListManagerProtocol) {
