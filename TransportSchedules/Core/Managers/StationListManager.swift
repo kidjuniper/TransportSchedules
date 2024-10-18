@@ -21,10 +21,10 @@ final class StationListManager {
     // MARK: - Private Properties
     private let yandexAPIManager: YandexAPIManagerProtocol
     private var lastFindedCities: [Settlement] = []
-    private var arrival: Settlement = Settlement(title: "Москва",
+    private var arrival: Settlement = Settlement(title: K.arrivalCityPlaceholder,
                                                  codes: CountryCodes(),
                                                  stations: [])
-    private var departure: Settlement = Settlement(title: "Нижний Новгород",
+    private var departure: Settlement = Settlement(title: K.departureCityPlaceholder,
                                                    codes: CountryCodes(),
                                                    stations: [])
     
