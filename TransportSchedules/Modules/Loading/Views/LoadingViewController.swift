@@ -81,14 +81,8 @@ extension LoadingViewController: LoadingViewInputProtocol {
         }
         errorAnimationView.loopMode = .loop
         errorAnimationView.play()
-        
+
         loadingLabel.removeFromSuperview()
-        view.addSubview(loadingLabel)
-        loadingLabel.snp.makeConstraints { make in
-            make.horizontalEdges.equalToSuperview()
-            make.top.equalTo(errorAnimationView.snp.bottom)
-        }
-        loadingLabel.text = "Возникла ошибка \nперезапустите приложение"
     }
     
     func stopAnimation() {
