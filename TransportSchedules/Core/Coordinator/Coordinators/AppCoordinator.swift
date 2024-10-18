@@ -37,7 +37,8 @@ private extension AppCoordinator {
         
         coordinator.finishFlow = { [weak self,
                                     weak coordinator] in
-            guard let self = self, let coordinator = coordinator else { return }
+            guard let self = self,
+                  let coordinator = coordinator else { return }
             self.removeChildCoordinator(coordinator)
             self.showSearchScreen()
         }
