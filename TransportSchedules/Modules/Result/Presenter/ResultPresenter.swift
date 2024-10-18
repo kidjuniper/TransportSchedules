@@ -54,7 +54,7 @@ extension ResultPresenter: ResultViewOutputProtocol {
         
         let transportLabel = UILabel()
         transportLabel.numberOfLines = 0
-        transportLabel.text = scheduleManager.requestLastSearchData()[indexPath.row].thread.vehicle + scheduleManager.requestLastSearchData()[indexPath.row].thread.transportSubtype.title
+        transportLabel.text = scheduleManager.requestLastSearchData()[indexPath.row].thread.vehicle + scheduleManager.requestLastSearchData()[indexPath.row].thread.transportSubtype.title + scheduleManager.requestLastSearchData()[indexPath.row].thread.number
         transportLabel.font = K.smallFont
         requiredHeight += transportLabel.sizeThatFits(fittingSize).height
         
