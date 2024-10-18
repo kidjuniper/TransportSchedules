@@ -19,7 +19,7 @@
   <img src="https://www.kidjuniper.ru/dir1.png" alt="Screenshot1" style="width: 130px; height: auto;"/>
   <img src="https://www.kidjuniper.ru/dir2.png" alt="Screenshot1" style="width: 130px; height: auto;"/>
   <img src="https://www.kidjuniper.ru/dir3.png" alt="Screenshot1" style="width: 130px; height: auto;"/>
-  <img src="https://www.kidjuniper.ru/dir7.png" alt="Screenshot1" style="width: 130px; height: auto;"/>
+  <img src="https://www.kidjuniper.ru/dir10.png" alt="Screenshot1" style="width: 130px; height: auto;"/>
   <img src="https://www.kidjuniper.ru/dir5.png" alt="Screenshot1" style="width: 130px; height: auto;"/>
 </div>
 
