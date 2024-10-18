@@ -127,7 +127,7 @@ extension SearchPresenter: SearchViewOutputProtocol {
                     self.coordinator.resultShowingFlow?()
                 }
             case .failure:
-                self.coordinator.resultShowingFlow?()
+                self.viewController?.showNothingFoundPopUp()
             }
         }
     }
