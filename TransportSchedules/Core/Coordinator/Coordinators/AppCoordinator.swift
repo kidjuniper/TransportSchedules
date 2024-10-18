@@ -87,7 +87,8 @@ private extension AppCoordinator {
             
             self.handleCitySelection(forArrival: forArrival,
                                      city: city)
-            self.router.dismissModule(animated: true)
+            self.router.dismissModule(animated: true,
+                                      completion: nil)
             self.removeChildCoordinator(coordinator)
         }
         coordinator.start()
