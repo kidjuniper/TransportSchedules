@@ -80,24 +80,29 @@ private extension AppCoordinator {
         let coordinator = factory.makeStationsCoordinator(router: router,
                                                           stationManager: stationListManager)
         addChildCoordinator(coordinator)
-        
         coordinator.finishFlow = { [weak self,
                                     weak coordinator] city in
-            guard let self = self, let coordinator = coordinator else { return }
-            if let searchViewController = self.router.root as? SearchViewController {
-                if forArrival {
-                    stationListManager.selectArrivalCity(city: city)
-                    searchViewController.presenter?.didSelectedArrivalCity(city: city)
-                } else {
-                    stationListManager.selectDepartureCity(city: city)
-                    searchViewController.presenter?.didSelectedDepartureCity(city: city)
-                }
-                router.dismissModule(animated: true) {}
-            }
+            guard let self = self,
+                  let coordinator = coordinator else { return }
+            
+            self.handleCitySelection(forArrival: forArrival,
+                                     city: city)
+            self.router.dismissModule(animated: true)
             self.removeChildCoordinator(coordinator)
         }
-        
         coordinator.start()
+    }
+
+    private func handleCitySelection(forArrival: Bool,
+                                     city: City) {
+        guard let searchViewController = self.router.root as? SearchViewController else { return }
+        if forArrival {
+            stationListManager.selectArrivalCity(city: city)
+            searchViewController.presenter?.didSelectedArrivalCity(city: city)
+        } else {
+            stationListManager.selectDepartureCity(city: city)
+            searchViewController.presenter?.didSelectedDepartureCity(city: city)
+        }
     }
     
     func showResult() {
