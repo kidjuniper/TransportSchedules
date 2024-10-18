@@ -33,7 +33,7 @@ final class YandexAPIManager: YandexAPIManagerProtocol {
         getThreadsRequest.asURLRequest { result in
             switch result {
             case .success(let request):
-                AF.request(request).responseDecodable(of: ThreadList.self) { response in
+                AF.request(request).validate().responseDecodable(of: ThreadList.self) { response in
                     switch response.result {
                     case .success(let data):
                         completion(.success(data))
@@ -53,7 +53,7 @@ final class YandexAPIManager: YandexAPIManagerProtocol {
         getStationsRequest.asURLRequest { result in
             switch result {
             case .success(let request):
-                AF.request(request).responseDecodable(of: StationList.self) { response in
+                AF.request(request).validate().responseDecodable(of: StationList.self) { response in
                     switch response.result {
                     case .success(let data):
                         completion(.success(data))
