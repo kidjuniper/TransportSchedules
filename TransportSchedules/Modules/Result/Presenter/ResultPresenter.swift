@@ -19,6 +19,7 @@ final class ResultPresenter: NSObject {
     // MARK: - Private Properties
     private var viewController: ResultViewInputProtocol
     private let scheduleManager: ScheduleManagerProtocol
+    private lazy var searchData = scheduleManager.requestLastSearchData()
     
     // MARK: - Initializer
     init(scheduleManager: ScheduleManagerProtocol,
@@ -42,19 +43,19 @@ extension ResultPresenter: ResultViewOutputProtocol {
         
         let mainLabel = UILabel()
         mainLabel.numberOfLines = 0
-        mainLabel.text = scheduleManager.requestLastSearchData()[indexPath.row].thread.title
+        mainLabel.text = searchData[indexPath.row].thread.title
         mainLabel.font = K.mainBoldFont
         requiredHeight += mainLabel.sizeThatFits(fittingSize).height
         
         let detailLabel = UILabel()
         detailLabel.numberOfLines = 0
-        detailLabel.text = scheduleManager.requestLastSearchData()[indexPath.row].thread.carrier?.title ?? ""
+        detailLabel.text = searchData[indexPath.row].thread.carrier?.title ?? ""
         detailLabel.font = K.smallFont
         requiredHeight += detailLabel.sizeThatFits(fittingSize).height
         
         let transportLabel = UILabel()
         transportLabel.numberOfLines = 0
-        transportLabel.text = scheduleManager.requestLastSearchData()[indexPath.row].thread.vehicle + scheduleManager.requestLastSearchData()[indexPath.row].thread.transportSubtype.title + scheduleManager.requestLastSearchData()[indexPath.row].thread.number
+        transportLabel.text = searchData[indexPath.row].thread.vehicle + searchData[indexPath.row].thread.transportSubtype.title + searchData[indexPath.row].thread.number
         transportLabel.font = K.smallFont
         requiredHeight += transportLabel.sizeThatFits(fittingSize).height
         
@@ -64,13 +65,13 @@ extension ResultPresenter: ResultViewOutputProtocol {
     // TableView dataSource
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        return scheduleManager.requestLastSearchData().count
+        return searchData.count
     }
     
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ResultTableViewCell.cellId) as! ResultTableViewCell
-        cell.configure(with: scheduleManager.requestLastSearchData()[indexPath.row])
+        cell.configure(with: searchData[indexPath.row])
         return cell
     }
 }
