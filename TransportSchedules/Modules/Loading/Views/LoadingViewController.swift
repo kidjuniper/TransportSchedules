@@ -19,9 +19,10 @@ final class LoadingViewController: UIViewController {
     
     // MARK: - Private Properties
     private let loadingAnimationView = LottieAnimationView(name: K.loadingAnimationName)
-    private lazy var loadingLabel = makeLoadingLabel()
+    private lazy var loadingLabel = makeLabel()
+    private lazy var errorLabel = makeLabel()
     private let errorAnimationView = LottieAnimationView(name: K.badConnectionAnimationName)
-    private var labelAnimationManager: AnimatedTextViewManagerProtocol!
+    private var labelAnimationManager: AnimatedTextViewManagerProtocol?
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -52,7 +53,6 @@ extension LoadingViewController {
             make.height.equalTo(100)
             make.top.equalTo(loadingAnimationView.snp.bottom)
         }
-        
     }
     
     private func setUpAnimations() {
@@ -62,7 +62,7 @@ extension LoadingViewController {
         labelAnimationManager = AnimatedTextViewManager(texts: K.loadingTextsTemplate,
                                                       label: loadingLabel)
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.labelAnimationManager.startCycling()
+            self.labelAnimationManager?.startCycling()
         }
     }
     
@@ -82,7 +82,13 @@ extension LoadingViewController: LoadingViewInputProtocol {
         errorAnimationView.loopMode = .loop
         errorAnimationView.play()
         
-        labelAnimationManager.startCycling()
+        loadingLabel.removeFromSuperview()
+        view.addSubview(loadingLabel)
+        loadingLabel.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(100)
+            make.top.equalTo(errorAnimationView.snp.bottom)
+        }
         loadingLabel.text = "Возникла ошибка \nперезапустите приложение"
     }
     
@@ -95,7 +101,7 @@ extension LoadingViewController: LoadingViewInputProtocol {
 
 // MARK: - UI Factoring
 extension LoadingViewController {
-    private func makeLoadingLabel() -> UILabel {
+    private func makeLabel() -> UILabel {
         let label = UILabel()
         label.font = K.bigFont
         label.textColor = UIColor(named: "accentTextColor")

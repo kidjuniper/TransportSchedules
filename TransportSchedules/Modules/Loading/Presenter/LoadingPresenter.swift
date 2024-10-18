@@ -13,10 +13,12 @@ protocol LoadingViewOutputProtocol: AnyObject {
 }
 
 final class LoadingPresenter: LoadingViewOutputProtocol {
+    // MARK: - Private Properties
     private var viewController: LoadingViewInputProtocol
     private let coordinator: LoadingCoordinatorProtocol
     private let stationListManager: StationListManagerProtocol
     
+    // MARK: - Initializer
     init(coordinator: LoadingCoordinatorProtocol,
          viewController: LoadingViewInputProtocol,
          stationListManager: StationListManagerProtocol) {

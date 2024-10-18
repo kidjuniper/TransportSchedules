@@ -28,6 +28,7 @@ protocol SearchViewOutputProtocol: AnyObject,
 }
 
 final class SearchPresenter: NSObject {
+    // MARK: - Private Properties
     private weak var viewController: SearchViewInputProtocol?
     private let coordinator: SearchCoordinatorProtocol
     private let scheduleManager: ScheduleManagerProtocol
@@ -111,10 +112,12 @@ extension SearchPresenter: SearchViewOutputProtocol {
     }
     
     func didTappedSearch() {
+        viewController?.showLoading()
         let isoFormatter = ISO8601DateFormatter()
         let iso8601String = isoFormatter.string(from: selectedDate)
         scheduleManager.requestThreads(date: iso8601String,
                                        transport: selectedTransport) { result in
+            self.viewController?.stopShowingLoading()
             switch result {
             case .success(let data):
                 if data.isEmpty {
@@ -129,7 +132,7 @@ extension SearchPresenter: SearchViewOutputProtocol {
         }
     }
     
-    // CollectionView related
+    // CollectionView DataSource
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         transportData.count

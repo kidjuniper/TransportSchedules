@@ -30,6 +30,10 @@ final class ResultPresenter: NSObject {
 
 // MARK: - StationsViewOutputProtocol extension
 extension ResultPresenter: ResultViewOutputProtocol {
+    func viewDidLoad() {
+        viewController.reloadSearch()
+    }
+    
     func heightForRowAt(indexPath: IndexPath) -> CGFloat {
         var requiredHeight = K.standartInset * 3
         let labelWidth = UIScreen.main.bounds.width / 4
@@ -57,10 +61,7 @@ extension ResultPresenter: ResultViewOutputProtocol {
         return requiredHeight
     }
     
-    func viewDidLoad() {
-        
-    }
-    
+    // TableView dataSource
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         return scheduleManager.requestLastSearchData().count
