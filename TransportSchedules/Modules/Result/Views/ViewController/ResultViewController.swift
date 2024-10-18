@@ -28,6 +28,7 @@ class ResultViewController: UIViewController {
     // MARK: - Lyfe Cicle
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.viewDidLoad()
         setUp()
     }
 }

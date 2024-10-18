@@ -14,6 +14,8 @@ protocol SearchViewInputProtocol: AnyObject,
                                  UICollectionViewDelegateFlowLayout {
     func updateSelectedTransport()
     func showNothingFoundPopUp()
+    func showLoading()
+    func stopShowingLoading()
     func setArrivalCityTitle(_ title: String)
     func setDepartureCityTitle(_ title: String)
 }
@@ -33,6 +35,7 @@ final class SearchViewController: UIViewController {
     private lazy var transportCollection = makeTransportCollectionView()
     private lazy var searchButton = makeSearchButton()
     private lazy var stackView = makeStackView()
+    private lazy var loadingIndicator = makeLodingIndicator()
     private let animationView = LottieAnimationView(name: K.searchScreenAnimationName)
     
     // MARK: - Constraints
@@ -46,7 +49,20 @@ final class SearchViewController: UIViewController {
     }
 }
 
+// MARK: - SearchViewInputProtocol extension
 extension SearchViewController: SearchViewInputProtocol {
+    func showLoading() {
+        view.addSubview(loadingIndicator)
+        loadingIndicator.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(30)
+        }
+    }
+    
+    func stopShowingLoading() {
+        loadingIndicator.removeFromSuperview()
+    }
+    
     func showNothingFoundPopUp() {
         let alert = UIAlertController(title: "Прямых рейсов по вашему запросу не найдено",
                                       message: nil,
@@ -71,6 +87,7 @@ extension SearchViewController: SearchViewInputProtocol {
         transportCollection.reloadData()
     }
     
+    // CollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
         presenter?.didSelectedTransport(atIndex: indexPath)
@@ -97,6 +114,7 @@ extension SearchViewController: DateSelectionDelegate {
     }
 }
 
+// MARK: - StationsSelectionDelegate extension
 extension SearchViewController: StationsSelectionDelegate {
     func swap() {
         presenter?.swap()
@@ -249,5 +267,12 @@ extension SearchViewController {
         stackView.alignment = .fill
         stackView.distribution = .fillProportionally
         return stackView
+    }
+    
+    private func makeLodingIndicator() -> UIActivityIndicatorView {
+        let loadingIndicator = UIActivityIndicatorView(style: .large)
+        loadingIndicator.color = .accentText
+        loadingIndicator.startAnimating()
+        return loadingIndicator
     }
 }

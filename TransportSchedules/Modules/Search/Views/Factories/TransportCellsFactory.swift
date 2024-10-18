@@ -8,12 +8,6 @@
 import Foundation
 import UIKit
 
-struct TransportCellData {
-    var type: TransportCellType
-    var isSelected: Bool
-    var contentName: String
-}
-
 protocol TransportCellProtocol: UICollectionViewCell {
     func configure(withData: TransportCellData)
 }
@@ -59,9 +53,4 @@ enum TransportCellsFactory {
         cell.layer.cornerRadius = 10
         return cell
     }
-}
-
-enum TransportCellType {
-    case text
-    case image
 }
