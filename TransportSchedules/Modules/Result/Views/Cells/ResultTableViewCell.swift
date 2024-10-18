@@ -44,7 +44,7 @@ class ResultTableViewCell: UITableViewCell {
     func configure(with data: Segment) {
         threadLabel.text = data.thread.title
         carrierLabel.text = data.thread.carrier?.title ?? ""
-        let vihicle = data.thread.number + data.thread.vehicle == "" ? data.thread.transportSubtype.title : data.thread.vehicle
+        let vihicle = data.thread.number + " " + (data.thread.vehicle == "" ? data.thread.transportSubtype.title : data.thread.vehicle)
         transportLabel.text = vihicle
         switch data.thread.transportType {
         case .plane:

@@ -86,7 +86,6 @@ extension LoadingViewController: LoadingViewInputProtocol {
         view.addSubview(loadingLabel)
         loadingLabel.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(100)
             make.top.equalTo(errorAnimationView.snp.bottom)
         }
         loadingLabel.text = "Возникла ошибка \nперезапустите приложение"
